@@ -1,20 +1,36 @@
 import { createStore } from "redux";
 
+//Action Generators
+const incrementCount = (payload = {}) => {
+    //debugger;
+    return {
+        type: 'INCREMENT',
+        incrementby: typeof payload.incrementby === 'number' ? payload.incrementby :1
+    };
+};
+
+//Further re-factor of above code
+const decrementCount=({decrementBy=5})=>{
+    return{
+        type:"DECREMENT",
+        decrementBy
+    }
+}
 
 const store = createStore((state = { count: 0 }, action) => {
     // debugger;
     //  console.log("Running...");
     switch (action.type) {
         case "INCREMENT":
-            const incrementby = typeof action.incrementby === 'number' ? action.incrementby : 1;
+           
             return {
-                count: state.count + incrementby
+                count: state.count + action.incrementby
             }
             break;
         case "DECREMENT":
-            const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
+           // const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
             return {
-                count: state.count - decrementBy
+                count: state.count - action.decrementBy
             }
             break;
         case "RESET":
@@ -51,15 +67,13 @@ create actions to:
 2.Drement the counter =>Dcrement
 3.Reset the counter to ZERO =>Reset
 */
-store.dispatch({
-    type: "INCREMENT", //Action
-    incrementby: 5
-});
-
-store.dispatch({
-    type: "DECREMENT",//Action
-    decrementBy: 10
-});
+// store.dispatch({
+//     type: "INCREMENT", //Action
+//     incrementby: 5
+// });
+//Above code can be replace by below code
+store.dispatch(incrementCount({ incrementby:10}));
+store.dispatch(decrementCount({decrementBy:5}));
 //this will unSubscribe the subscription
 unSubscribe();
 store.dispatch({
