@@ -1,34 +1,21 @@
 import { createStore } from "redux";
 
-//Action Generators
-const incrementCount = (payload = {}) => {
-    //debugger;
-    return {
-        type: 'INCREMENT',
-        incrementby: typeof payload.incrementby === 'number' ? payload.incrementby :1
-    };
-};
+/*Reducers
+Reducers specify how the application's state changes in response to actions sent to the store. Remember that actions only describe what happened, but don't describe how the application's state changes.
+*/
 
-//Further re-factor of above code
-const decrementCount=({decrementBy=5})=>{
-    return{
-        type:"DECREMENT",
-        decrementBy
-    }
-}
-
-const store = createStore((state = { count: 0 }, action) => {
+ const countReducer=(state = { count: 0 }, action) => {
     // debugger;
     //  console.log("Running...");
     switch (action.type) {
         case "INCREMENT":
-           
+
             return {
                 count: state.count + action.incrementby
             }
             break;
         case "DECREMENT":
-           // const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
+            // const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
             return {
                 count: state.count - action.decrementBy
             }
@@ -47,7 +34,9 @@ const store = createStore((state = { count: 0 }, action) => {
             break;
     }
 
-});
+}
+
+const store = createStore(countReducer);
 
 /*subscribe 
 To watch for changes to the Redux store we use subscribe
@@ -66,7 +55,27 @@ create actions to:
 1.Increment the counter =>Increment
 2.Drement the counter =>Dcrement
 3.Reset the counter to ZERO =>Reset
+
+
 */
+
+//Action Generators
+const incrementCount = (payload = {}) => {
+    //debugger;
+    return {
+        type: 'INCREMENT',
+        incrementby: typeof payload.incrementby === 'number' ? payload.incrementby : 1
+    };
+};
+
+//Further re-factor of above code
+const decrementCount = ({ decrementBy = 5 }) => {
+    return {
+        type: "DECREMENT",
+        decrementBy
+    }
+}
+
 // store.dispatch({
 //     type: "INCREMENT", //Action
 //     incrementby: 5
