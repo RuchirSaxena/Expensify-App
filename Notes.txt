@@ -1,0 +1,60 @@
+Redux
+========
+Redux is used for State Mangament of application at a single place , instead of managing state in Individual components.Its basically a state container.
+
+Why to use Redux
+======================
+1.For simple application ie.Where we have only one parent component and the total no. of components passing data to the parent component is less than we can used setState() method for managing the State
+BUT
+When we have complex architecture of application where we can have multiple parent components then the intreaction between these components becomes difficult as these are not related therefore managing state between them then we should use Redux 
+
+So there componets are not Re-usable because in the component depends upon the props .
+For Eg: Action Componet ,this action componet requires button text and an event(function) to save the new item and after saving this new item the app needs to re-render the app to display this item , so we can pass down the Name and event(fuction) through props , but then when we pass the event and then this event passed back to the top then to the parent component to modify the state of app , now this dependencdy of props for a component becomes it less re-usable (check img.CompentsReusablity.png).
+
+So, using props to pass required data of a component is not a issue , but if multple components are involved just to pass the props to the component then we should avoid it .
+For Eg. Component1 pass prop(SomeData) to Component2 then Component2 pass prop(SomeData) to Componet3 and then it goes on to pass to Component4 and finally it meets it meets to the component where actually this prop(SomeData) is required ie.Component5.
+
+
+The Questions Redux Answers 
+=================================
+Q1.Where do I strore my app state in a complex React App?
+Q2.How do I create components that are actually reusable ?
+Q3.Do You need a single source of truth for your state?
+Q4.Do You find that keeping all your state in a top-level component is no longer sufficient
+Ans . Redux
+
+How Redux Works
+====================
+In Redux we create =>Redux Store
+We communicate through Redux Store to work .
+
+Redux Creation Involves 4 Steps
+=================================
+1.Store 
+  It requires 2 pices of Information
+  => Reducers and 
+  => State =>Initial State
+
+2.Reducers
+ It requires 2 pices of Information
+ => State and
+ => Action
+
+4.Subscribe
+ => Its used to get the current State
+
+5.Dispatch
+ => What actions you need to take i.e. Actions are send to the Dispatch  
+
+ Steps to StepUp Redux
+========================
+Step 1: npm install --save redux
+
+Step 2:Import createStore form Redux
+import { createStore } from "redux";
+
+Step 3:Create a Store and pass state and reducer to it
+let state={count:0};
+
+const store = createStore(state,action);
+
