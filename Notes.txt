@@ -31,9 +31,8 @@ We communicate through Redux Store to work .
 Redux Creation Involves 4 Steps
 =================================
 1.Store 
-  It requires 2 pices of Information
-  => Reducers and 
-  => State =>Initial State
+  It requires 1 pices of Information
+  => Reducers 
 
 2.Reducers
  It requires 2 pices of Information
@@ -53,8 +52,31 @@ Step 1: npm install --save redux
 Step 2:Import createStore form Redux
 import { createStore } from "redux";
 
-Step 3:Create a Store and pass state and reducer to it
-let state={count:0};
+Step 3:Create a Store 
 
-const store = createStore(state,action);
+const store = createStore(reducer);
+
+Step4: Create Reducer 
+Reducers takes 2 things:
+1.State =>Intial State
+2.Action =>Action We want to perform (Eg:ADD,DELETE,EDIT)
+
+const reducer=(state={},action)=>{
+  //switch case for modify state when different action are taken
+  switch (action.type) {
+        case "ADD":
+            return {
+              //modified state
+            }
+            break;
+        case "DELETE":
+            return {
+              //modified state
+            }
+            break;
+        default:
+            return state;
+            break;
+    }
+}
 
