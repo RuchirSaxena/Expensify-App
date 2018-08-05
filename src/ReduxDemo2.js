@@ -2,6 +2,8 @@ import { createStore } from "redux";
 
 /*Reducers
 Reducers specify how the application's state changes in response to actions sent to the store. Remember that actions only describe what happened, but don't describe how the application's state changes.
+1.Ruducer are pure fuctions 
+2.Never change state or action
 */
 
  const countReducer=(state = { count: 0 }, action) => {
@@ -36,6 +38,8 @@ Reducers specify how the application's state changes in response to actions sent
 
 }
 
+
+//createStore Takes reducer 
 const store = createStore(countReducer);
 
 /*subscribe 
