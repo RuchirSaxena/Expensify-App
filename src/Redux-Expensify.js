@@ -1,6 +1,16 @@
 import { createStore, combineReducers } from 'redux';
-
+//import { uuid } from 'uuid';
 //combineReducers =>its a functions that takes an object which can take multiple reducers to simplify complex app where we have huge state
+
+function UUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+};
 
 //Application initail State
 const expenseState = {
@@ -26,10 +36,19 @@ const expenseState = {
 let expenseReducerDefaultState = [];
 const expenseReducer = (state = expenseReducerDefaultState, action) => {
     switch (action.type) {
-        case "value":
-
+        case "ADD_EXPENSE":
+            return [
+                ...state,
+                action.expense
+            ]; //OR state.concat(action.expense);
             break;
-
+        case "REMOVE_EXPENSE":
+        debugger;
+           return state.filter((item) => {
+                return item.id !== action.id;
+            });
+           
+            break;
         default:
             return state;
             break;
@@ -57,23 +76,72 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
 
 //Store creation
 const store = createStore(combineReducers({
-    expenses:expenseReducer,
+    expenses: expenseReducer,
     filter: filterReducer
 }));
 
 console.log(store.getState());
 
 /*Actions for this expnsify app
-================================
-1.ADD_EXPENSE
-2.REMOVE_EXPENSE
-3.EDIT_EXPENSE
-4.SET_TEXT_FILTER
-5.SORT_BY_DATE
-6.SORT_BY_AMOUNT
-7.SET_START_DATE
-8.SET_END_DATE
-*/
+================================*/
+// 1.ADD_EXPENSE
+const addExpense = (
+    //default Arguments for the function
+    { description = '',
+        note = '',
+        amount = 0,
+        createdAt = 0
+    } = {}
+) => {
+
+    return {
+
+        type: "ADD_EXPENSE",
+        expense: {
+            id: UUID(),
+            description, //== description :description
+            note,
+            amount,
+            createdAt
+
+        }
+    }
+};
+
+//subscribe to the store
+store.subscribe(() => {
+    console.log(store.getState());
+});
+
+//Dispatch action =>Expense one
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', note: 'Rent paid for the month', amount: 10000, createdAt: '20/07/2018' }));
+
+//Dispatch action =>Expense two
+const expenseTwo = store.dispatch(addExpense({
+    description: 'Car',
+    note: 'car service',
+    createdAt: '21/08/2018',
+    amount: 5000
+}));
+
+
+// 2.REMOVE_EXPENSE
+const removeExpense = (id = 0) => {
+    return {
+        type: "REMOVE_EXPENSE",
+        id: id
+    }
+};
+console.info("Expense one:",expenseOne);
+store.dispatch(removeExpense(expenseOne.expense.id));
+
+// 3.EDIT_EXPENSE
+// 4.SET_TEXT_FILTER
+// 5.SORT_BY_DATE
+// 6.SORT_BY_AMOUNT
+// 7.SET_START_DATE
+// 8.SET_END_DATE
+
 
 
 
