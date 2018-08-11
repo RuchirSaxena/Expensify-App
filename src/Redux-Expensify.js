@@ -2,6 +2,8 @@ import { createStore, combineReducers } from 'redux';
 //import { uuid } from 'uuid';
 //combineReducers =>its a functions that takes an object which can take multiple reducers to simplify complex app where we have huge state
 
+
+
 function UUID() {
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -43,11 +45,21 @@ const expenseReducer = (state = expenseReducerDefaultState, action) => {
             ]; //OR state.concat(action.expense);
             break;
         case "REMOVE_EXPENSE":
-        debugger;
-           return state.filter((item) => {
+            return state.filter((item) => {
                 return item.id !== action.id;
             });
-           
+            break;
+        case "EDIT_EXPENSE":
+            return state.map((expense) => {
+                if (expense.id === action.id) {
+                    return {
+                        ...expense,
+                        ...action.updatedExpense
+                    }
+                } else {
+                    return expense;
+                }
+            });
             break;
         default:
             return state;
@@ -64,10 +76,37 @@ let filterReducerDefaultState = {
 };
 const filterReducer = (state = filterReducerDefaultState, action) => {
     switch (action.type) {
-        case "value":
-
+        case "SET_TEXT_FILTER":
+            debugger;
+            return {
+                ...state,
+                text: action.text
+            }
             break;
-
+        case "SORT_BY_DATE":
+            return {
+                ...state,
+                sortBy: action.date
+            }
+            break;
+        case "SORT_BY_AMOUNT":
+            return {
+                ...state,
+                sortBy: action.amount
+            }
+            break;
+        case "SET_START_DATE":
+            return {
+                ...state,
+                startDate: action.startDate
+            }
+            break;
+        case "SET_END_DATE":
+            return {
+                ...state,
+                endDate: action.endDate
+            }
+            break;
         default:
             return state;
             break;
@@ -132,16 +171,68 @@ const removeExpense = (id = 0) => {
         id: id
     }
 };
-console.info("Expense one:",expenseOne);
+console.info("Expense one:", expenseOne);
 store.dispatch(removeExpense(expenseOne.expense.id));
 
 // 3.EDIT_EXPENSE
+const editExpense = (id = 0, updatedExpense = {}) => {
+    return {
+        type: "EDIT_EXPENSE",
+        id,
+        updatedExpense
+    }
+};
+
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 25000 }));
+
 // 4.SET_TEXT_FILTER
+const setTextFilter = (text = '') => {
+    return {
+        type: "SET_TEXT_FILTER",
+        text
+    }
+
+};
+
+store.dispatch(setTextFilter("car price filter"));
+
 // 5.SORT_BY_DATE
+const sortByDate = (date = '') => {
+    return {
+        type: "SORT_BY_DATE",
+        date
+    }
+};
+
+store.dispatch(sortByDate({ sortBy: 'Date' }));
 // 6.SORT_BY_AMOUNT
+const sortByAmount = (amount = '') => {
+    return {
+        type: "SORT_BY_AMOUNT",
+        amount
+    }
+};
+
+store.dispatch(sortByDate({ sortBy: 'Amount' }));
 // 7.SET_START_DATE
+const setStartDate = (startDate = '') => {
+    return {
+        type: 'SET_START_DATE',
+        startDate
+    }
+}
+
+store.dispatch(setStartDate(new Date()));
 // 8.SET_END_DATE
 
+const setEndDate = (endDate = '') => {
+    debugger;
+    return {
+        type: 'SET_END_DATE',
+        endDate
+    }
+}
 
+store.dispatch(setEndDate(new Date()));
 
 
