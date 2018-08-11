@@ -222,7 +222,7 @@ const setStartDate = (startDate = '') => {
     }
 }
 
-store.dispatch(setStartDate(new Date()));
+store.dispatch(setStartDate(124));
 // 8.SET_END_DATE
 
 const setEndDate = (endDate = '') => {
@@ -233,6 +233,8 @@ const setEndDate = (endDate = '') => {
     }
 }
 
-store.dispatch(setEndDate(new Date()));
+store.dispatch(setEndDate(456));
+
+
 
 
