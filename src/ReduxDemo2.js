@@ -7,7 +7,7 @@ Reducers specify how the application's state changes in response to actions sent
 */
 
  const countReducer=(state = { count: 0 }, action) => {
-    // debugger;
+    //   
     //  console.log("Running...");
     switch (action.type) {
         case "INCREMENT":
@@ -65,7 +65,7 @@ create actions to:
 
 //Action Generators
 const incrementCount = (payload = {}) => {
-    //debugger;
+    //  
     return {
         type: 'INCREMENT',
         incrementby: typeof payload.incrementby === 'number' ? payload.incrementby : 1

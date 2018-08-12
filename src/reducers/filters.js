@@ -8,7 +8,7 @@ let filterReducerDefaultState = {
 export const filterReducer = (state = filterReducerDefaultState, action) => {
     switch (action.type) {
         case "SET_TEXT_FILTER":
-            debugger;
+              
             return {
                 ...state,
                 text: action.text

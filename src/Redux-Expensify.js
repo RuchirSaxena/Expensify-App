@@ -77,7 +77,7 @@ let filterReducerDefaultState = {
 const filterReducer = (state = filterReducerDefaultState, action) => {
     switch (action.type) {
         case "SET_TEXT_FILTER":
-            debugger;
+              
             return {
                 ...state,
                 text: action.text
@@ -226,7 +226,7 @@ store.dispatch(setStartDate(124));
 // 8.SET_END_DATE
 
 const setEndDate = (endDate = '') => {
-    debugger;
+      
     return {
         type: 'SET_END_DATE',
         endDate

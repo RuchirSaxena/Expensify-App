@@ -38,7 +38,7 @@ export const setStartDate = (startDate = '') => {
 
 // 5.SET_END_DATE
 export const setEndDate = (endDate = '') => {
-    debugger;
+      
     return {
         type: 'SET_END_DATE',
         endDate
