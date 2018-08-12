@@ -11,6 +11,7 @@ import  configureStore  from './store/configureStore';
 import { addExpense,removeExpense,editExpense } from "./actions/expenses";
 import {setTextFilter,sortByDate,sortByAmount,setStartDate,setEndDate } from "./actions/filters";
 import  getVisibleExpense from './selectors/expenses';
+import { AdminInfo, RequireAuthentication } from "./HOC";
 
 
 const store = configureStore();
@@ -44,5 +45,5 @@ const state=store.getState();
 const visibleExpense = getVisibleExpense(state.expenses, state.filters);
 console.log(visibleExpense);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<RequireAuthentication isAuthenticated={false} data='this is Info about HOC' />, document.getElementById('root'));
 
