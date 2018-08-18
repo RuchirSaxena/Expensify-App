@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
+import selectExpense from "../selectors/expenses";
 
 
 const ExpenseList = (props) => {
@@ -12,19 +13,26 @@ const ExpenseList = (props) => {
              createdAt={expense.createdAt}
         />
         OR 
-        */ 
-       return <ExpenseListItem 
-       key={expense.id} {...expense} />
+        */
+        return <ExpenseListItem
+            key={expense.id} {...expense} />
 
     });
     return (
         <div>
             <h1>Expense List</h1>
-            <table border="1">
-                <tbody>
-                    {expenseList}
-                </tbody>
-            </table>
+            {expenseList.length>0 &&
+                <table border="1">
+                    <thead>
+                        <td>Description</td>
+                        <td>Amount</td>
+                        <td>Due Date</td>
+                    </thead>
+                    <tbody>
+                        {expenseList}
+                    </tbody>
+                </table>
+            }
         </div>
 
     );
@@ -40,7 +48,8 @@ const ExpenseList = (props) => {
 //A better way to implement above code
 const mapStateToProps = (state) => {
     return {
-        expenses: state.expenses
+        expenses: selectExpense(state.expenses, state.filters)
+
     };
 };
 export default connect(mapStateToProps)(ExpenseList);

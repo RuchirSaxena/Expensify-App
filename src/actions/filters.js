@@ -19,10 +19,10 @@ export const sortByDate = (date = '') => {
 
 
 // 3.SORT_BY_AMOUNT
-export const sortByAmount = (amount = '') => {
+export const sortByAmount = () => {
     return {
-        type: "SORT_BY_AMOUNT",
-        amount
+        type: "SORT_BY_AMOUNT"
+       
     }
 };
 
@@ -30,8 +30,7 @@ export const sortByAmount = (amount = '') => {
 // 4.SET_START_DATE
 export const setStartDate = (startDate = '') => {
     return {
-        type: 'SET_START_DATE',
-        startDate
+        type: 'SET_START_DATE'
     }
 }
 

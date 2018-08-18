@@ -31,7 +31,7 @@ store.subscribe(() => {
 
 store.dispatch(addExpense({
     note: 'water bill',
-    description: 'paid bill',
+    description: 'can manage this bill eaisly',
     amount: 2000,
     createdAt: 234
 }));
@@ -39,13 +39,20 @@ store.dispatch(addExpense({
 
 store.dispatch(addExpense({
     note: 'Gas bill',
-    description: 'Not Paid bill',
-    createdAt: '11/08/2018',
+    description: 'Huge amount to be paid',
+    createdAt: '787',
     amount: 600
 }));
 
+store.dispatch(addExpense({
+    note: 'Car Sell',
+    description: 'Need to sell car',
+    createdAt: 400,
+    amount: 150000
+}));
 
-store.dispatch(setTextFilter("bill"));
+
+//store.dispatch(setTextFilter("paid bill"));
 
 const state = store.getState();
 const visibleExpense = getVisibleExpense(state.expenses, state.filters);
