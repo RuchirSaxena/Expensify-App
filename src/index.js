@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 //Routing File
-import AppRouter from './routers/AppRouter'
+import AppRouter from './routers/AppRouter';
+
+
 //#region  Redux without react
 //import { } from "./ReduxDemo2";
 //import { } from "./Redux-Expensify";
@@ -50,7 +52,12 @@ const visibleExpense = getVisibleExpense(state.expenses, state.filters);
 console.log(visibleExpense);
 //#endregion
 
+const jsx=(
+    <Provider store={store}>
+         <AppRouter/>
+    </Provider>
+   
+);
 
-
-ReactDOM.render(<AppRouter/>, document.getElementById('root'));
+ReactDOM.render(jsx, document.getElementById('root'));
 
